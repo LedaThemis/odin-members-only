@@ -20,7 +20,7 @@
     </section>
     <section id="user-section">
       <% if (currentUser) { %>
-      <p><%= currentUser.fullName %> ● <a href="/user/logout">Log out</a></p>
+      <p><%= currentUser.fullName %> — <a href="/user/logout">Log out</a></p>
       <% } else { %>
         <p>Not logged in</p>
       <% } %>
