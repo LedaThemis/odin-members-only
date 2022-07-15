@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %> | Odin Members Only</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-  </head>
-  <body>
-    <main id="main">
-      <nav id="nav">
-        <h2>Navigation</h2>
-        <ul>
-        </ul>
-      </nav>
-      <section id="route-section">
-        <%- include(content, {title, ...props}); %>
-      </section>
-    </main>
-  </body>
+
+<head>
+  <title><%= title %> | Odin Members Only</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+
+<body>
+  <main id="main">
+    <nav id="nav">
+      <h2>Navigation</h2>
+      <ul>
+        <li><a href="/user/login">Login</a></li>
+        <li><a href="/user/register">Register</a></li>
+      </ul>
+    </nav>
+    <section id="route-section">
+      <%- include(content, {title, ...props}); %>
+    </section>
+    <section id="user-section">
+      <% if (currentUser) { %>
+      <p><%= currentUser.fullName %> ● <a href="/user/logout">Log out</a></p>
+      <% } else { %>
+        <p>Not logged in</p>
+      <% } %>
+    </section>
+  </main>
+</body>
+
 </html>
