@@ -1,4 +1,4 @@
-<h1>Register</h1>
+<h1><%= title %></h1>
 <form class="form" method="POST">
   <div class="form-group">
     <label for="first_name">First name:</label>
@@ -20,7 +20,7 @@
     <label for="confirm_password">Confirm password:</label>
     <input id="confirm_password" name="confirm_password" type="password" placeholder="7ay93A@L" required="true">
   </div>
-  <button type="submit">Register</button>
+  <button type="submit"><%= title %></button>
 </form>
 
 <%- include("../errors", { errors }); %>
