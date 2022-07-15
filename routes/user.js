@@ -7,7 +7,7 @@ const userController = require('../controllers/userController');
 router.get('/register', userController.register_get);
 
 // POST request to register new user
-router.post('/register', userController.register_get);
+router.post('/register', userController.register_post);
 
 // GET request to login user
 router.get('/login', userController.login_get);
