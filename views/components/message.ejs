@@ -6,7 +6,7 @@
       <% } else { %>
       Anonymous
       <% } %>
-    </p> 
+    </p>
     posted
     <p class="message-title">"<%= message.title %>"</p>
     <% if (currentUser && (currentUser.isAdmin || currentUser.isMember && message.author.isMember)) { %>
@@ -16,4 +16,7 @@
     <% } %>
   </div>
   <p class="message-content"><%= message.content %></p>
+  <% if (currentUser && currentUser.isAdmin) { %>
+  <a href="/message/<%= message._id %>/delete">Delete Message</a>
+  <% } %>
 </div>
