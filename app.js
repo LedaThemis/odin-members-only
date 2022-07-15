@@ -6,18 +6,18 @@ const logger = require('morgan');
 const compression = require('compression');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const passport = require('passport');
 
 // configure dotenv
 require('dotenv').config();
+
+const { strategy, serializeFn, deserializeFn } = require('./auth');
 
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/user');
 const joinRouter = require('./routes/join');
 const messageRouter = require('./routes/message');
-
-const app = express();
-
-app.use(helmet());
 
 // Set up mongoose connection
 const mongoDB_URI = process.env.MONGODB_URI;
@@ -25,10 +25,21 @@ mongoose.connect(mongoDB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+// Setup LocalStrategy
+passport.use(strategy);
+passport.serializeUser(serializeFn);
+passport.deserializeUser(deserializeFn);
+
+const app = express();
+app.use(helmet());
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
