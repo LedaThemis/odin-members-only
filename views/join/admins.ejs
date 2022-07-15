@@ -1,0 +1,17 @@
+<% if (currentUser) { %>
+<% if (currentUser.isAdmin) { %>
+<p>You're already an admin!</p>
+<% } else { %>
+<p>You can become an admin by entering a secret passcode.</p>
+<form class="form" method="POST">
+  <div class="form-group">
+    <label for="passcode">Passcode:</label>
+    <input id="passcode" name="passcode" type="password" placeholder="Hint: becomeadmin" required="true">
+  </div>
+  <button class="submit-button" type="submit"><%= title %></button>
+</form>
+<%- include('../errors', { errors }) %>
+<% } %>
+<% } else { %>
+<%- include('../not-logged-in') %>
+<% } %>
