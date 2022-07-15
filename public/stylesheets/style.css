@@ -1,5 +1,5 @@
 :root {
-  --nav-padding: 30px
+  --nav-padding: 30px;
 }
 
 body {
@@ -92,4 +92,11 @@ ul {
 .error {
   color: red;
   padding: 2px;
+}
+
+#user-section {
+  position: absolute;
+  right: 0;
+
+  padding: 10px;
 }
