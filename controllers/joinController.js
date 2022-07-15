@@ -33,7 +33,7 @@ exports.join_club_post = function (req, res, next) {
 };
 
 exports.join_admin_get = function (req, res, next) {
-  res.send('NOT IMPLEMENTED');
+  res.render('index', { title: 'Become Admin', content: 'join/admins', props: { errors: undefined } });
 };
 
 exports.join_admin_post = function (req, res, next) {
