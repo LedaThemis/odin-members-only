@@ -13,6 +13,10 @@
       <ul>
         <li><a href="/user/login">Login</a></li>
         <li><a href="/user/register">Register</a></li>
+        <% if (currentUser) { %>
+        <li><a href="/join/club">Join Members club</a></li>
+        <li><a href="/join/admins">Become an admin!</a></li>
+        <% } %>
       </ul>
     </nav>
     <section id="route-section">
@@ -22,7 +26,7 @@
       <% if (currentUser) { %>
       <p><%= currentUser.fullName %> — <a href="/user/logout">Log out</a></p>
       <% } else { %>
-        <p>Not logged in</p>
+      <p>Not logged in</p>
       <% } %>
     </section>
   </main>
