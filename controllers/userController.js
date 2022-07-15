@@ -109,3 +109,13 @@ exports.login_post = [
     }
   },
 ];
+
+exports.logout_get = function (req, res, next) {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    } else {
+      res.redirect('/');
+    }
+  });
+};
