@@ -68,7 +68,7 @@ exports.register_post = [
 ];
 
 exports.login_get = function (req, res, next) {
-  res.send('NOT IMPLEMENTED');
+  res.render('index', { title: 'Login', content: 'user/login', props: { user: undefined, errors: undefined } });
 };
 
 exports.login_post = function (req, res, next) {
