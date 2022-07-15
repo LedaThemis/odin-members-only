@@ -1,4 +1,7 @@
 <% if (currentUser) { %>
+<% if (currentUser.isMember) { %>
+<p>You're already in the Members club!</p>
+<% } else { %>
 <p>You can join the Members club by entering the secret passcode.</p>
 <form class="form" method="POST">
   <div class="form-group">
@@ -8,6 +11,7 @@
   <button class="submit-button" type="submit"><%= title %></button>
 </form>
 <%- include('../errors', { errors }) %>
+<% } %>
 <% } else { %>
 <%- include('../not-logged-in') %>
 <% } %>
