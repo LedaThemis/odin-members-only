@@ -11,6 +11,9 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
+const userRouter = require('./routes/user');
+const joinRouter = require('./routes/join');
+const messageRouter = require('./routes/message');
 
 const app = express();
 
@@ -34,6 +37,9 @@ app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/user', userRouter);
+app.use('/join', joinRouter);
+app.use('/message', messageRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
