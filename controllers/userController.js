@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
 const { body, validationResult } = require('express-validator');
 
 const User = require('../models/user');
@@ -71,6 +72,40 @@ exports.login_get = function (req, res, next) {
   res.render('index', { title: 'Login', content: 'user/login', props: { user: undefined, errors: undefined } });
 };
 
-exports.login_post = function (req, res, next) {
-  res.send('NOT IMPLEMENTED');
-};
+exports.login_post = [
+  body('username', 'Username must not be empty.')
+    .trim()
+    .isLength({ min: 1 })
+    .isEmail()
+    .withMessage('Username must be an email.')
+    .escape(),
+  body('password', 'Password must 8 characters or more.').trim().isLength({ min: 8 }).escape(),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render('index', { title: 'Login', content: 'user/login', props: { user: req.body, errors: errors.errors } });
+    } else {
+      passport.authenticate('local', (err, user, info) => {
+        if (err) next(err);
+
+        if (!user) {
+          // user authentication failed
+          return res.render('index', {
+            title: 'Login',
+            content: 'user/login',
+            props: { user: req.body, errors: [{ msg: info.message }] },
+          });
+        }
+
+        req.login(user, (error) => {
+          // error during logging in
+          if (error) next(error);
+
+          // Successfully logged in
+          return res.redirect('/');
+        });
+      })(req, res, next);
+    }
+  },
+];
