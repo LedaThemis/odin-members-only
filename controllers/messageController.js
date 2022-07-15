@@ -44,3 +44,17 @@ exports.create_message_post = [
     }
   },
 ];
+
+exports.delete_message_get = function (req, res, next) {
+  if (req.user && req.user.isAdmin) {
+    Message.findByIdAndDelete(req.params.id).exec((err) => {
+      if (err) {
+        return next(err);
+      }
+
+      res.redirect('/');
+    });
+  } else {
+    res.redirect('/');
+  }
+};
