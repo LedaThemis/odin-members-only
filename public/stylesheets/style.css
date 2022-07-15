@@ -44,6 +44,8 @@ ul {
   box-sizing: border-box;
   padding: var(--nav-padding);
   height: 100%;
+  text-align: center;
+  width: 200px;
 }
 
 #nav > ul {
